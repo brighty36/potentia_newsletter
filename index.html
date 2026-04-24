@@ -150,7 +150,7 @@
       pointer-events: none;
     }
     .hero > * { position: relative; z-index: 1; }
-    .hero-logo { height: 34px; margin: 0 auto 36px; opacity: .9; }
+
     .hero-kicker {
       display: inline-flex;
       align-items: center;
@@ -287,7 +287,7 @@
     }
     .author-photo {
       width: 100%;
-      height: 210px;
+      height: 130px;
       object-fit: cover;
       object-position: top center;
     }
@@ -615,7 +615,7 @@
         padding-right: 24px;
       }
       .author-card { position: static; }
-      .author-photo { height: 280px; }
+      .author-photo { height: 130px; }
     }
   </style>
 </head>
@@ -638,7 +638,6 @@
 
 <!-- HERO -->
 <header class="hero">
-  <img class="hero-logo" src="data:image/png;base64,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" alt="Potentia Insight">
   <p class="hero-kicker">Vol. 12 &nbsp;&middot;&nbsp; Q1 2026</p>
   <h1>Field <em>Intelligence</em></h1>
   <p class="hero-sub">Quarterly insights, case studies and data quality intelligence from the Potentia Insight team.</p>
@@ -651,7 +650,7 @@
   <div class="note-grid">
     <div class="note-content">
       <span class="eyebrow">This quarter&rsquo;s briefing</span>
-      <h2>A note from<br>Suzy Hassan</h2>
+      <h2>A note from Suzy Hassan</h2>
       <div class="pull-quote">
         <p>&ldquo;The problem is getting worse &mdash; and we built something to address it.&rdquo;</p>
       </div>
@@ -688,7 +687,7 @@
   <div class="protect-cards">
     <div class="p-card fade-up">
       <div class="top-bar"></div>
-      <div class="icon-zone">&#128274;</div>
+      <div class="icon-zone">[image]</div>
       <div class="p-body">
         <h3>Verisoul Integration</h3>
         <p>Removing AI-generated respondents and bots on entry to the survey, stopping bad data before it starts.</p>
@@ -696,7 +695,7 @@
     </div>
     <div class="p-card fade-up">
       <div class="top-bar"></div>
-      <div class="icon-zone">&#9881;&#65039;</div>
+      <div class="icon-zone">[image]</div>
       <div class="p-body">
         <h3>In-House Detection Tool</h3>
         <p>Our own proprietary tool flags respondents based on multiple quality indicators, running automatically during collection.</p>
@@ -704,7 +703,7 @@
     </div>
     <div class="p-card fade-up">
       <div class="top-bar"></div>
-      <div class="icon-zone">&#128100;</div>
+      <div class="icon-zone">[image]</div>
       <div class="p-body">
         <h3>Human In The Loop</h3>
         <p>Most importantly, our PMs check data manually to validate final delivery. The human element stays.</p>
