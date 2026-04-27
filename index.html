@@ -4,9 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Field Intelligence — Potentia Insight</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Rework Text';
+      src: url('Rework Font/ReworkText-Light.woff2') format('woff2'),
+           url('Rework Font/ReworkText-Light.woff') format('woff');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Rework Text';
+      src: url('Rework Font/ReworkText-Bold.woff2') format('woff2'),
+           url('Rework Font/ReworkText-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14,6 +29,7 @@
       --navy:    #0D0C3D;
       --navy-2:  #1a1952;
       --navy-3:  #2a2960;
+      --blue:    #312DC0;
       --orange:  #DF6027;
       --orange-h:#c8521e;
       --cream:   #F4F1E9;
@@ -27,7 +43,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: "DM Sans", "Trebuchet MS", Arial, sans-serif;
+      font-family: 'Rework Text', "Trebuchet MS", Arial, sans-serif;
       background: var(--cream);
       color: var(--dark);
       -webkit-font-smoothing: antialiased;
@@ -246,8 +262,12 @@
       background: var(--navy);
       border: 1px solid rgba(255,255,255,.07);
       border-radius: 12px;
-      padding: 44px 24px;
-      text-align: center;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
       cursor: pointer;
       margin: 32px 0;
       transition: transform .25s, box-shadow .25s;
@@ -263,7 +283,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
+      margin: 0 auto;
       font-size: 20px;
       color: var(--white);
       padding-left: 4px;
@@ -309,7 +329,7 @@
       color: var(--mid);
       margin-bottom: 12px;
     }
-    .sig { height: 34px; opacity: .7; }
+    .sig { display: block; height: 34px; opacity: .7; margin: 0 auto; }
 
     /* ── PROTECT ── */
     .protect-section {
@@ -610,7 +630,7 @@
 
     /* ── COMPANY UPDATES ── */
     .updates-section {
-      background: var(--white);
+      background: var(--blue);
       padding: 88px 40px;
     }
     .updates-head {
@@ -618,10 +638,11 @@
       max-width: 600px;
       margin: 0 auto 52px;
     }
+    .updates-head .eyebrow { color: rgba(255,255,255,.7); }
     .updates-head h2 {
       font-size: clamp(30px, 4.5vw, 44px);
       font-weight: 700;
-      color: var(--dark);
+      color: var(--white);
       letter-spacing: -.8px;
       line-height: 1.15;
     }
@@ -697,7 +718,7 @@
 
     /* ── SIGNUP ── */
     .signup-section {
-      background: var(--navy);
+      background: var(--blue);
       padding: 80px 40px;
       position: relative;
       overflow: hidden;
@@ -979,10 +1000,6 @@
     <h2>Subscribe to Field Intelligence</h2>
     <p>Get our quarterly briefing delivered straight to your inbox &mdash; data quality insights, case studies and company news.</p>
     <form class="signup-form" action="#" method="post" novalidate>
-      <div class="form-row">
-        <input type="text"  name="first_name" placeholder="First name"    autocomplete="given-name"  required>
-        <input type="text"  name="last_name"  placeholder="Last name"     autocomplete="family-name" required>
-      </div>
       <input type="email" name="email" placeholder="Work email address" autocomplete="email" required>
       <button type="submit" class="btn btn-full">Subscribe &rarr;</button>
     </form>
