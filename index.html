@@ -809,9 +809,243 @@
       .author-photo { width: 120px; height: 120px; }
       .form-row { grid-template-columns: 1fr; }
     }
+
+    /* ── INTERACTIVE ENHANCEMENTS ── */
+
+    /* top scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange) 0%, #ff8a4d 100%);
+      z-index: 200;
+      box-shadow: 0 0 12px rgba(223,96,39,.6);
+      transition: width .08s linear;
+    }
+
+    /* section progress frame: 4 lines that draw clockwise as you scroll */
+    .has-frame { position: relative; }
+    .section-frame {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      --p: 0;
+      --frame-color: var(--orange);
+      --frame-thickness: 2px;
+    }
+    .section-frame span {
+      position: absolute;
+      background: var(--frame-color);
+      box-shadow: 0 0 10px var(--frame-color);
+      will-change: transform;
+    }
+    .section-frame .sf-top {
+      top: 0; left: 0;
+      height: var(--frame-thickness);
+      width: 100%;
+      transform: scaleX(clamp(0, calc(var(--p) * 4), 1));
+      transform-origin: left center;
+    }
+    .section-frame .sf-right {
+      top: 0; right: 0;
+      width: var(--frame-thickness);
+      height: 100%;
+      transform: scaleY(clamp(0, calc((var(--p) - 0.25) * 4), 1));
+      transform-origin: center top;
+    }
+    .section-frame .sf-bottom {
+      bottom: 0; right: 0;
+      height: var(--frame-thickness);
+      width: 100%;
+      transform: scaleX(clamp(0, calc((var(--p) - 0.5) * 4), 1));
+      transform-origin: right center;
+    }
+    .section-frame .sf-left {
+      bottom: 0; left: 0;
+      width: var(--frame-thickness);
+      height: 100%;
+      transform: scaleY(clamp(0, calc((var(--p) - 0.75) * 4), 1));
+      transform-origin: center bottom;
+    }
+    /* per-section frame color */
+    .protect-section .section-frame,
+    .updates-section .section-frame { --frame-color: #ff8a4d; }
+    .talk-section .section-frame { --frame-color: #ffffff; }
+
+    /* a small dot at the leading edge of the drawing border, gives a "tracer" look */
+    .section-frame::before {
+      content: "";
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--frame-color);
+      box-shadow: 0 0 14px var(--frame-color), 0 0 28px var(--frame-color);
+      opacity: clamp(0, calc(var(--p) * 6), 1);
+      top: 0; left: 0;
+      transform: translate(-4px, -4px);
+      transition: opacity .2s;
+    }
+    .section-frame.complete::before { opacity: 0; }
+
+    /* nav active state */
+    .nav-links a.active {
+      color: var(--orange);
+      position: relative;
+    }
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -8px;
+      height: 2px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+
+    /* card 3D tilt — base prep so JS-applied transforms are smooth */
+    .p-card, .t-card, .u-card {
+      transform-style: preserve-3d;
+      perspective: 800px;
+      will-change: transform;
+    }
+    .p-card .icon-zone,
+    .t-card .t-card-img,
+    .u-card .u-card-img,
+    .p-card .p-body,
+    .t-card .t-body,
+    .u-card .u-body {
+      transform: translateZ(0);
+      transition: transform .25s ease;
+    }
+    .p-card.tilting .icon-zone,
+    .t-card.tilting .t-card-img,
+    .u-card.tilting .u-card-img { transform: translateZ(20px); }
+    .p-card.tilting .p-body,
+    .t-card.tilting .t-body,
+    .u-card.tilting .u-body { transform: translateZ(8px); }
+
+    /* shimmering accent on cards while in view */
+    .p-card::after, .t-card::after, .u-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%);
+      transform: translateX(-110%);
+      transition: transform .9s ease;
+    }
+    .p-card, .t-card, .u-card { position: relative; }
+    .p-card.shine::after, .t-card.shine::after, .u-card.shine::after { transform: translateX(110%); }
+
+    /* hero mouse parallax — make the dot grid shift slightly with the cursor */
+    .hero { --mx: 0px; --my: 0px; }
+    .hero::after {
+      transform: translate(var(--mx), var(--my));
+      transition: transform .25s ease-out;
+    }
+    .hero::before {
+      transform: translate(calc(-50% + var(--mx) * -0.5), calc(var(--my) * -0.5));
+      transition: transform .35s ease-out;
+    }
+
+    /* hero animated underline on the highlighted word */
+    .hero h1 em {
+      position: relative;
+      display: inline-block;
+    }
+    .hero h1 em::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 4px;
+      height: 4px;
+      background: var(--orange);
+      border-radius: 2px;
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: heroUnderline 1.4s .35s ease forwards;
+    }
+    @keyframes heroUnderline {
+      to { transform: scaleX(1); }
+    }
+
+    /* hero kicker fade on load */
+    .hero-kicker, .hero h1, .hero-sub {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: heroIn .8s ease forwards;
+    }
+    .hero h1 { animation-delay: .15s; }
+    .hero-sub { animation-delay: .3s; }
+    @keyframes heroIn {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* scroll-to-top button */
+    #scroll-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 22px rgba(223,96,39,.45);
+      opacity: 0;
+      transform: translateY(20px) scale(.85);
+      pointer-events: none;
+      transition: opacity .3s, transform .3s, background .2s;
+      z-index: 150;
+    }
+    #scroll-top.visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    #scroll-top:hover { background: var(--orange-h); }
+
+    /* button click ripple */
+    .btn { position: relative; overflow: hidden; }
+    .btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      transform: scale(0);
+      animation: ripple .65s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .section-frame span,
+      .section-frame::before,
+      .hero::after, .hero::before,
+      .hero-kicker, .hero h1, .hero-sub,
+      .hero h1 em::after,
+      #scroll-top, #scroll-progress {
+        transition: none !important;
+        animation: none !important;
+      }
+      .hero-kicker, .hero h1, .hero-sub { opacity: 1; transform: none; }
+      .hero h1 em::after { transform: scaleX(1); }
+    }
   </style>
 </head>
 <body>
+
+<!-- top scroll progress bar -->
+<div id="scroll-progress" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav id="site-nav">
@@ -1033,12 +1267,16 @@
   </p>
 </footer>
 
+<!-- scroll-to-top button -->
+<button id="scroll-top" type="button" aria-label="Scroll to top">&#8593;</button>
+
 <script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // Nav shadow on scroll
   const nav = document.getElementById('site-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 8);
-  }, { passive: true });
+  const progressBar = document.getElementById('scroll-progress');
+  const scrollTopBtn = document.getElementById('scroll-top');
 
   // Fade-up on scroll
   const io = new IntersectionObserver(
@@ -1048,6 +1286,161 @@
     { threshold: 0.14 }
   );
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // Add scroll-progress frames around major sections
+  const framedSections = document.querySelectorAll(
+    '.note-section, .protect-section, .team-section, .updates-section, .signup-section, .talk-section'
+  );
+  const frameRecords = [];
+  framedSections.forEach(sec => {
+    sec.classList.add('has-frame');
+    const frame = document.createElement('div');
+    frame.className = 'section-frame';
+    frame.innerHTML =
+      '<span class="sf-top"></span>' +
+      '<span class="sf-right"></span>' +
+      '<span class="sf-bottom"></span>' +
+      '<span class="sf-left"></span>';
+    sec.appendChild(frame);
+    frameRecords.push({ sec, frame });
+  });
+
+  // Active nav-link tracking
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const linkTargets = navLinks
+    .map(a => ({ link: a, target: document.querySelector(a.getAttribute('href')) }))
+    .filter(o => o.target);
+
+  // Single requestAnimationFrame-driven scroll handler
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+      const docH = document.documentElement.scrollHeight - vh;
+
+      // nav shadow
+      nav.classList.toggle('scrolled', scrollY > 8);
+
+      // top progress bar
+      const pct = docH > 0 ? Math.min(100, (scrollY / docH) * 100) : 0;
+      progressBar.style.width = pct + '%';
+
+      // scroll-to-top visibility
+      scrollTopBtn.classList.toggle('visible', scrollY > 600);
+
+      // section frames: progress is 0 when section bottom is at viewport bottom,
+      // and 1 when section bottom reaches top of viewport — i.e. you've scrolled past it.
+      frameRecords.forEach(({ sec, frame }) => {
+        const rect = sec.getBoundingClientRect();
+        // start drawing once the top of the section enters the viewport
+        const total = rect.height + vh * 0.4;
+        const traveled = vh - rect.top;
+        let p = traveled / total;
+        if (p < 0) p = 0;
+        if (p > 1) p = 1;
+        frame.style.setProperty('--p', p.toFixed(4));
+        frame.classList.toggle('complete', p >= 0.999);
+      });
+
+      // active nav link
+      let activeIdx = -1;
+      const probe = scrollY + vh * 0.35;
+      linkTargets.forEach((o, i) => {
+        const top = o.target.getBoundingClientRect().top + scrollY;
+        if (top <= probe) activeIdx = i;
+      });
+      navLinks.forEach(a => a.classList.remove('active'));
+      if (activeIdx >= 0) linkTargets[activeIdx].link.classList.add('active');
+
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // Smooth scroll-to-top
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  // Hero parallax — dot grid follows cursor very slightly
+  const hero = document.querySelector('.hero');
+  if (hero && !reduceMotion) {
+    hero.addEventListener('mousemove', e => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      hero.style.setProperty('--mx', (x * 18).toFixed(1) + 'px');
+      hero.style.setProperty('--my', (y * 14).toFixed(1) + 'px');
+    });
+    hero.addEventListener('mouseleave', () => {
+      hero.style.setProperty('--mx', '0px');
+      hero.style.setProperty('--my', '0px');
+    });
+  }
+
+  // Card 3D tilt on hover — subtle
+  const tiltCards = document.querySelectorAll('.p-card, .t-card, .u-card');
+  if (!reduceMotion) {
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        const rx = (-y * 6).toFixed(2);
+        const ry = (x * 6).toFixed(2);
+        card.style.transform = 'translateY(-5px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+        card.classList.add('tilting');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.classList.remove('tilting');
+      });
+    });
+  }
+
+  // Card shimmer when first revealed in view
+  const shineIO = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('shine'), 200);
+        shineIO.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.35 }
+  );
+  tiltCards.forEach(c => shineIO.observe(c));
+
+  // Button ripple
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const r = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      const size = Math.max(r.width, r.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - r.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - r.top - size / 2) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+    });
+  });
+
+  // Smooth nav anchor scrolling with offset for sticky nav
+  navLinks.forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = nav.offsetHeight + 8;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  });
 </script>
 </body>
 </html>
