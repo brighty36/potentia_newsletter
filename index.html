@@ -263,13 +263,14 @@
       border: 1px solid rgba(255,255,255,.07);
       border-radius: 12px;
       aspect-ratio: 16 / 9;
+      max-width: 480px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 16px;
       cursor: pointer;
-      margin: 32px 0;
+      margin: 32px auto;
       transition: transform .25s, box-shadow .25s;
     }
     .video-block:hover {
@@ -630,7 +631,7 @@
 
     /* ── COMPANY UPDATES ── */
     .updates-section {
-      background: var(--blue);
+      background: var(--navy);
       padding: 88px 40px;
     }
     .updates-head {
@@ -718,7 +719,7 @@
 
     /* ── SIGNUP ── */
     .signup-section {
-      background: var(--blue);
+      background: var(--cream);
       padding: 80px 40px;
       position: relative;
       overflow: hidden;
@@ -727,7 +728,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
       background-size: 28px 28px;
       pointer-events: none;
     }
@@ -737,11 +738,11 @@
       margin: 0 auto;
       text-align: center;
     }
-    .signup-section .eyebrow { color: rgba(223,96,39,.85); margin-bottom: 12px; }
+    .signup-section .eyebrow { color: var(--orange); margin-bottom: 12px; }
     .signup-section h2 {
       font-size: clamp(28px, 4vw, 38px);
       font-weight: 700;
-      color: var(--white);
+      color: var(--navy);
       letter-spacing: -.6px;
       line-height: 1.15;
       margin-bottom: 12px;
@@ -749,7 +750,7 @@
     .signup-section p {
       font-size: 15px;
       line-height: 1.7;
-      color: var(--light);
+      color: var(--mid);
       margin-bottom: 36px;
     }
     .signup-form {
@@ -765,20 +766,20 @@
     .signup-form input[type="text"],
     .signup-form input[type="email"] {
       width: 100%;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.15);
       border-radius: 8px;
       padding: 14px 18px;
       font-family: inherit;
       font-size: 14px;
-      color: var(--white);
+      color: var(--dark);
       outline: none;
       transition: border-color .2s, background .2s;
     }
-    .signup-form input::placeholder { color: var(--light); }
+    .signup-form input::placeholder { color: var(--mid); }
     .signup-form input:focus {
       border-color: var(--orange);
-      background: rgba(255,255,255,.12);
+      background: var(--white);
     }
     .signup-form .btn-full {
       width: 100%;
