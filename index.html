@@ -4,23 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Field Intelligence — Potentia Insight</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Rework Text';
+      src: url('Rework Font/ReworkText-Light.woff2') format('woff2'),
+           url('Rework Font/ReworkText-Light.woff') format('woff');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Rework Text';
+      src: url('Rework Font/ReworkText-Bold.woff2') format('woff2'),
+           url('Rework Font/ReworkText-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:    #0A0B2E;
-      --navy-2:  #13153F;
-      --navy-3:  #1E2151;
-      --ink:     #0B0B14;
-      --orange:  #E0591F;
-      --orange-h:#C84913;
-      --orange-l:#F08E5C;
-      --cream:   #F6F2E7;
-      --cream-2: #EFE9D8;
-      --sand:    #D8D1BF;
+      --navy:    #0D0C3D;
+      --navy-2:  #1a1952;
+      --navy-3:  #2a2960;
+      --blue:    #312DC0;
+      --orange:  #DF6027;
+      --orange-h:#c8521e;
+      --cream:   #F4F1E9;
+      --sand:    #d0cdc5;
       --white:   #ffffff;
       --dark:    #141420;
       --mid:     #5B5A66;
@@ -35,7 +48,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--sans);
+      font-family: 'Rework Text', "Trebuchet MS", Arial, sans-serif;
       background: var(--cream);
       color: var(--dark);
       -webkit-font-smoothing: antialiased;
@@ -430,34 +443,18 @@
     .video-block {
       position: relative;
       background: var(--navy);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 18px;
-      padding: 64px 24px;
-      text-align: center;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      aspect-ratio: 16 / 9;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
       cursor: pointer;
-      margin: 40px 0;
-      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    .video-block::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(60% 80% at 50% 120%, rgba(224,89,31,.28) 0%, transparent 60%),
-        radial-gradient(40% 60% at 20% -20%, rgba(49,45,192,.3) 0%, transparent 60%);
-      z-index: -1;
-      opacity: .9;
-    }
-    .video-block::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
-      background-size: 22px 22px;
-      z-index: -1;
-      opacity: .7;
+      margin: 32px auto;
+      transition: transform .25s, box-shadow .25s;
     }
     .video-block:hover {
       transform: translateY(-4px);
@@ -472,7 +469,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
+      margin: 0 auto;
       font-size: 20px;
       color: var(--white);
       padding-left: 4px;
@@ -553,7 +550,7 @@
       letter-spacing: 1.6px;
       text-transform: uppercase;
     }
-    .sig { height: 38px; opacity: .75; margin: 0 auto; }
+    .sig { display: block; height: 34px; opacity: .7; margin: 0 auto; }
 
     /* ── PROTECT ── */
     .protect-section {
@@ -627,85 +624,45 @@
       counter-reset: pcard;
     }
     .p-card {
-      position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.01) 100%);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 18px;
+      background: var(--cream);
+      border-radius: 14px;
       overflow: hidden;
-      transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .35s, background .35s;
-      backdrop-filter: blur(8px);
-      isolation: isolate;
-      counter-increment: pcard;
-    }
-    .p-card::before {
-      content: counter(pcard, decimal-leading-zero);
-      position: absolute;
-      top: 22px;
-      right: 22px;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,.35);
-      z-index: 2;
-    }
-    .p-card::after {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: 18px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(224,89,31,.6), transparent 40%, transparent 70%, rgba(49,45,192,.4));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      opacity: 0;
-      transition: opacity .35s ease;
-      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 14px rgba(0,0,0,.06);
+      transition: transform .28s, box-shadow .28s;
     }
     .p-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(224,89,31,.25);
-      background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0,0,0,.11);
+    }
+    .p-card .top-bar {
+      display: none;
     }
     .p-card:hover::after { opacity: 1; }
 
     .p-card .top-bar { display: none; }
     .p-card .icon-zone {
-      background: transparent;
-      height: 120px;
+      background: var(--sand);
+      height: 160px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      font-size: 36px;
-      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      font-size: 30px;
     }
-    .p-card .icon-zone::before {
-      content: "";
-      position: absolute;
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(224,89,31,.22) 0%, transparent 70%);
-      filter: blur(4px);
-    }
-    .p-card .p-body { padding: 32px 28px 34px; text-align: left; }
+    .p-card .p-body { padding: 22px 20px 26px; flex: 1; display: flex; flex-direction: column; }
     .p-card h3 {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--white);
-      text-align: left;
-      margin-bottom: 14px;
-      line-height: 1.25;
-      letter-spacing: -.4px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 10px;
+      line-height: 1.35;
     }
     .p-card p {
-      font-size: 13.5px;
-      color: rgba(255,255,255,.65);
-      text-align: left;
-      line-height: 1.7;
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.65;
     }
 
     .gdq-bar {
@@ -1039,27 +996,21 @@
 
     /* ── COMPANY UPDATES ── */
     .updates-section {
-      background: var(--white);
-      padding: 140px 40px;
-      position: relative;
+      background: var(--navy);
+      padding: 88px 40px;
     }
     .updates-head {
       text-align: center;
       max-width: 700px;
       margin: 0 auto 72px;
     }
+    .updates-head .eyebrow { color: rgba(255,255,255,.7); }
     .updates-head h2 {
-      font-family: var(--serif);
-      font-size: clamp(44px, 6vw, 72px);
-      font-weight: 300;
-      font-variation-settings: "opsz" 144, "SOFT" 30;
-      color: var(--ink);
-      letter-spacing: -2.5px;
-      line-height: 1.02;
-    }
-    .updates-head h2::after {
-      content: ".";
-      color: var(--orange);
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.8px;
+      line-height: 1.15;
     }
     .updates-cards {
       max-width: 1200px;
@@ -1171,8 +1122,8 @@
 
     /* ── SIGNUP ── */
     .signup-section {
-      background: var(--navy);
-      padding: 140px 40px;
+      background: var(--cream);
+      padding: 80px 40px;
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -1181,21 +1132,8 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(50% 40% at 20% 30%, rgba(224,89,31,.18) 0%, transparent 60%),
-        radial-gradient(45% 35% at 80% 80%, rgba(49,45,192,.28) 0%, transparent 60%);
-      filter: blur(20px);
-      pointer-events: none;
-      z-index: -2;
-    }
-    .signup-section::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: radial-gradient(ellipse at center, #000 40%, transparent 90%);
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 90%);
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+      background-size: 28px 28px;
       pointer-events: none;
       z-index: -1;
     }
@@ -1205,30 +1143,21 @@
       margin: 0 auto;
       text-align: center;
     }
-    .signup-section .eyebrow { color: var(--orange-l); margin-bottom: 16px; }
+    .signup-section .eyebrow { color: var(--orange); margin-bottom: 12px; }
     .signup-section h2 {
-      font-family: var(--serif);
-      font-size: clamp(40px, 5.5vw, 64px);
-      font-weight: 300;
-      font-variation-settings: "opsz" 144, "SOFT" 30;
-      color: var(--white);
-      letter-spacing: -2px;
-      line-height: 1.02;
-      margin-bottom: 18px;
-    }
-    .signup-section h2::after {
-      content: ".";
-      color: var(--orange);
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -.6px;
+      line-height: 1.15;
+      margin-bottom: 12px;
     }
     .signup-section p {
       font-size: 16px;
       font-weight: 300;
       line-height: 1.7;
-      color: rgba(255,255,255,.7);
-      margin-bottom: 48px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
+      color: var(--mid);
+      margin-bottom: 36px;
     }
     .signup-form {
       display: flex;
@@ -1243,14 +1172,13 @@
     .signup-form input[type="text"],
     .signup-form input[type="email"] {
       width: 100%;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 18px 22px;
-      font-family: var(--sans);
-      font-size: 14.5px;
-      font-weight: 400;
-      color: var(--white);
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.15);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--dark);
       outline: none;
       transition: border-color .25s, background .25s, box-shadow .25s;
       backdrop-filter: blur(6px);
@@ -1259,10 +1187,10 @@
       color: rgba(255,255,255,.45);
       font-weight: 300;
     }
+    .signup-form input::placeholder { color: var(--mid); }
     .signup-form input:focus {
       border-color: var(--orange);
-      background: rgba(255,255,255,.08);
-      box-shadow: 0 0 0 4px rgba(224,89,31,.15);
+      background: var(--white);
     }
     .signup-form .btn-full {
       width: 100%;
@@ -1335,7 +1263,7 @@
 
 <!-- HERO -->
 <header class="hero">
-  <p class="hero-kicker">Vol. 12 &nbsp;&middot;&nbsp; Q1 2026</p>
+  <p class="hero-kicker">Vol. 1 &nbsp;&middot;&nbsp; May 2026</p>
   <h1>Field <em>Intelligence</em></h1>
   <p class="hero-sub">Quarterly insights, case studies and data quality intelligence from the Potentia Insight team.</p>
 </header>
@@ -1347,7 +1275,7 @@
   <div class="note-grid">
     <div class="note-content">
       <span class="eyebrow">This quarter&rsquo;s briefing</span>
-      <h2>A note from Suzy Hassan</h2>
+      <h2>A note from Suzy</h2>
       <div class="pull-quote">
         <p>&ldquo;The problem is getting worse &mdash; and we built something to address it.&rdquo;</p>
       </div>
@@ -1504,10 +1432,6 @@
     <h2>Subscribe to Field Intelligence</h2>
     <p>Get our quarterly briefing delivered straight to your inbox &mdash; data quality insights, case studies and company news.</p>
     <form class="signup-form" action="#" method="post" novalidate>
-      <div class="form-row">
-        <input type="text"  name="first_name" placeholder="First name"    autocomplete="given-name"  required>
-        <input type="text"  name="last_name"  placeholder="Last name"     autocomplete="family-name" required>
-      </div>
       <input type="email" name="email" placeholder="Work email address" autocomplete="email" required>
       <button type="submit" class="btn btn-full">Subscribe &rarr;</button>
     </form>
