@@ -958,6 +958,215 @@
       }
       .hero-kicker, .hero h1, .hero-sub { opacity: 1; transform: none; }
     }
+
+    /* ══════════════════════════════════════
+       INSIDER INSIGHTS-STYLE GRAPHICS
+       ══════════════════════════════════════ */
+
+    /* Floating sparkle stars */
+    @keyframes sparkle-drift {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.65; }
+      33%       { transform: translateY(-14px) rotate(18deg) scale(1.1); opacity: 1; }
+      66%       { transform: translateY(7px) rotate(-10deg) scale(0.9); opacity: 0.5; }
+    }
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      line-height: 1;
+      animation: sparkle-drift 6.5s ease-in-out infinite;
+      will-change: transform;
+      color: var(--orange);
+      user-select: none;
+    }
+    .sparkle.white { color: rgba(255,255,255,.6); }
+    .sparkle.s1 { animation-duration: 6s;   animation-delay: 0s; }
+    .sparkle.s2 { animation-duration: 8.5s; animation-delay: -2s; }
+    .sparkle.s3 { animation-duration: 7s;   animation-delay: -4.5s; }
+    .sparkle.s4 { animation-duration: 9.5s; animation-delay: -1.2s; }
+    .sparkle.s5 { animation-duration: 5.5s; animation-delay: -3.3s; }
+    .sparkle.s6 { animation-duration: 11s;  animation-delay: -6s; }
+
+    /* Icon zone SVG animation */
+    .p-card .icon-zone svg {
+      transition: transform .35s ease, filter .35s ease;
+      filter: drop-shadow(0 0 0px rgba(223,96,39,0));
+    }
+    .p-card:hover .icon-zone svg {
+      transform: scale(1.18) translateY(-4px);
+      filter: drop-shadow(0 6px 14px rgba(223,96,39,.45));
+    }
+
+    /* Stat counter blocks */
+    .protect-stats {
+      max-width: 1040px;
+      margin: 0 auto 52px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .stat-block {
+      text-align: center;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 30px 20px 26px;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s, border-color .3s, transform .28s;
+      cursor: default;
+    }
+    .stat-block:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(223,96,39,.5);
+      transform: translateY(-4px);
+    }
+    .stat-block::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .stat-block:hover::after { opacity: 1; }
+    @keyframes stat-icon-bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      45%       { transform: translateY(-8px) scale(1.08); }
+      65%       { transform: translateY(-3px) scale(1.03); }
+    }
+    .stat-icon {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 12px;
+      animation: stat-icon-bounce 2.8s ease-in-out infinite;
+    }
+    .stat-block:nth-child(2) .stat-icon { animation-delay: .6s; }
+    .stat-block:nth-child(3) .stat-icon { animation-delay: 1.2s; }
+    .stat-number {
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 8px;
+    }
+    .stat-number em {
+      color: var(--orange);
+      font-style: normal;
+      font-size: 36px;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--light);
+      line-height: 1.5;
+    }
+
+    /* Fun Fact badge */
+    .fun-fact-wrap {
+      margin-top: 28px;
+    }
+    .fun-fact-badge {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #FFF8E8;
+      border: 2px solid #DF6027;
+      border-radius: 16px;
+      padding: 14px 18px 14px 14px;
+      box-shadow: 4px 4px 0 rgba(223,96,39,.2);
+      transform: rotate(-1.2deg);
+      transition: transform .35s ease, box-shadow .35s ease;
+      cursor: default;
+      max-width: 440px;
+    }
+    .fun-fact-badge:hover {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: 6px 6px 0 rgba(223,96,39,.28);
+    }
+    .badge-icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+      animation: stat-icon-bounce 3s ease-in-out infinite;
+    }
+    .badge-label {
+      display: block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+    .badge-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    /* Talk section decorative floating icons */
+    .talk-deco {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      font-size: 48px;
+      line-height: 1;
+      opacity: 0.12;
+      animation: sparkle-drift 9s ease-in-out infinite;
+      user-select: none;
+    }
+    .talk-deco.td1 { top: 10%;  left: 4%;   font-size: 52px; animation-delay: 0s; }
+    .talk-deco.td2 { top: 20%;  right: 5%;  font-size: 40px; animation-delay: -3s; }
+    .talk-deco.td3 { bottom: 15%; left: 10%; font-size: 36px; animation-delay: -6s; }
+    .talk-deco.td4 { bottom: 20%; right: 8%; font-size: 44px; animation-delay: -1.5s; }
+
+    /* Cursor sparkle trail (hero only) */
+    .cursor-spark {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      animation: spark-fade .75s ease-out forwards;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes spark-fade {
+      0%   { opacity: .9; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0;  transform: translate(-50%, -50%) scale(0); }
+    }
+
+    /* Protect section sparkles in header */
+    .protect-head { position: relative; }
+
+    /* Section heading sparkle accents */
+    @keyframes heading-twinkle {
+      0%, 100% { opacity: .55; transform: scale(1) rotate(0deg); }
+      50%       { opacity: 1;   transform: scale(1.3) rotate(22deg); }
+    }
+    .heading-deco {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 20px;
+      animation: heading-twinkle 2.8s ease-in-out infinite;
+      vertical-align: middle;
+      line-height: 1;
+      margin: 0 6px;
+      user-select: none;
+    }
+    .heading-deco.d2 { animation-delay: .7s; font-size: 14px; }
+    .heading-deco.d3 { animation-delay: 1.4s; font-size: 18px; color: rgba(255,255,255,.55); }
+
+    @media (max-width: 760px) {
+      .protect-stats { grid-template-columns: 1fr; gap: 14px; }
+      .sparkle { display: none; }
+      .talk-deco { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -982,6 +1191,15 @@
 
 <!-- HERO -->
 <header class="hero">
+  <!-- Floating sparkle decorations -->
+  <span class="sparkle s1" style="top:16%; left:7%; font-size:22px;" aria-hidden="true">✦</span>
+  <span class="sparkle s2" style="top:28%; right:9%; font-size:14px;" aria-hidden="true">✧</span>
+  <span class="sparkle s3" style="bottom:24%; left:12%; font-size:30px;" aria-hidden="true">✦</span>
+  <span class="sparkle s4" style="top:10%; right:18%; font-size:18px;" aria-hidden="true">✦</span>
+  <span class="sparkle s5" style="bottom:32%; right:6%; font-size:16px;" aria-hidden="true">✧</span>
+  <span class="sparkle s6" style="top:58%; left:3%; font-size:12px;" aria-hidden="true">✦</span>
+  <span class="sparkle s2" style="top:72%; right:14%; font-size:10px;" aria-hidden="true">✦</span>
+  <span class="sparkle s4" style="bottom:12%; left:28%; font-size:20px;" aria-hidden="true">✧</span>
   <p class="hero-kicker">Vol. 1 &nbsp;&middot;&nbsp; May 2026</p>
   <h1>Field <em>Intelligence</em></h1>
   <p class="hero-sub">Quarterly insights, case studies and data quality intelligence from the Potentia Insight team.</p>
@@ -998,7 +1216,16 @@
       <div class="pull-quote">
         <p>&ldquo;Quality is not a step we add at the end. It is how we run every project from day one.&rdquo;</p>
       </div>
-      <p>Fraud in online research is not a new problem. But the tools being used to game surveys are getting smarter. Our clients make significant decisions off the back of online data. That is not something we take lightly, and we built something to address it.</p>
+      <div class="fun-fact-wrap">
+        <div class="fun-fact-badge">
+          <span class="badge-icon" aria-hidden="true">💡</span>
+          <div>
+            <span class="badge-label">Did you know</span>
+            <span class="badge-text">Up to 35% of online survey responses can be fraudulent — Potentia Protect is built to catch them.</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:28px;">Fraud in online research is not a new problem. But the tools being used to game surveys are getting smarter. Our clients make significant decisions off the back of online data. That is not something we take lightly, and we built something to address it.</p>
       <p>Potentia Protect&trade; brings together and formalises everything we do in a robust, end to end quality framework. Built on the principles of the Market Research Society Global Data Quality Pledge, Potentia Protect combines advanced technology, rigorous human oversight and a culture of continuous improvement to ensure clients receive data they can trust.</p>
       <div class="video-block" role="button" tabindex="0" aria-label="Watch: Behind the scenes at Potentia Insight">
         <div class="play-wrap">&#9654;</div>
@@ -1023,11 +1250,37 @@
 
 <!-- PROTECT -->
 <section class="protect-section" id="protect">
+  <!-- Protect section sparkle accents -->
+  <span class="sparkle white s3" style="top:6%; left:4%; font-size:24px;" aria-hidden="true">✦</span>
+  <span class="sparkle white s5" style="top:12%; right:6%; font-size:16px;" aria-hidden="true">✧</span>
+  <span class="sparkle white s1" style="bottom:8%; left:8%; font-size:18px;" aria-hidden="true">✦</span>
+  <span class="sparkle white s4" style="bottom:15%; right:4%; font-size:20px;" aria-hidden="true">✦</span>
+
   <div class="protect-head">
     <span class="eyebrow">Data Quality</span>
-    <h2>Potentia Protect&trade;</h2>
+    <h2><span class="heading-deco" aria-hidden="true">✦</span>Potentia Protect&trade;<span class="heading-deco d2" aria-hidden="true">✦</span></h2>
     <p>Quality is not a step we add at the end. It is how we run every project from day one. Potentia Protect is our end-to-end quality framework, built on the principles of the MRS Global Data Quality Pledge. It combines human expertise with advanced technology to catch what automated checks alone cannot.</p>
   </div>
+
+  <!-- Animated stat counters -->
+  <div class="protect-stats">
+    <div class="stat-block">
+      <span class="stat-icon" aria-hidden="true">🛡️</span>
+      <div class="stat-number"><span class="counter" data-target="98">0</span><em>%</em></div>
+      <p class="stat-label">Average data quality score</p>
+    </div>
+    <div class="stat-block">
+      <span class="stat-icon" aria-hidden="true">🔍</span>
+      <div class="stat-number"><span class="counter" data-target="12">0</span><em>+</em></div>
+      <p class="stat-label">Fraud checks per respondent</p>
+    </div>
+    <div class="stat-block">
+      <span class="stat-icon" aria-hidden="true">📊</span>
+      <div class="stat-number"><span class="counter" data-target="500">0</span><em>k+</em></div>
+      <p class="stat-label">Surveys quality-checked in 2025</p>
+    </div>
+  </div>
+
   <div class="protect-cards">
     <div class="p-card fade-up">
       <div class="top-bar"></div>
@@ -1069,7 +1322,7 @@
 <section class="team-section" id="team">
   <div class="team-head">
     <span class="eyebrow">Latest Content</span>
-    <h2>From The Team</h2>
+    <h2>From The Team <span class="heading-deco d2" style="color:var(--orange);" aria-hidden="true">✦</span></h2>
   </div>
   <div class="team-cards">
     <article class="t-card fade-up">
@@ -1106,7 +1359,7 @@
 <section class="updates-section" id="updates">
   <div class="updates-head">
     <span class="eyebrow">Inside Potentia</span>
-    <h2>Company Updates</h2>
+    <h2><span class="heading-deco d2" style="color:rgba(255,255,255,.5);" aria-hidden="true">✧</span> Company Updates <span class="heading-deco d2" style="color:rgba(255,255,255,.5);" aria-hidden="true">✧</span></h2>
   </div>
   <div class="updates-cards">
     <article class="u-card fade-up">
@@ -1153,6 +1406,11 @@
 
 <!-- TALK -->
 <section class="talk-section" id="contact">
+  <!-- Floating decorative icons -->
+  <span class="talk-deco td1" aria-hidden="true">✉️</span>
+  <span class="talk-deco td2" aria-hidden="true">💬</span>
+  <span class="talk-deco td3" aria-hidden="true">✦</span>
+  <span class="talk-deco td4" aria-hidden="true">🚀</span>
   <div class="talk-inner">
     <span class="eyebrow">Get In Touch</span>
     <h2>Want to talk?</h2>
@@ -1380,6 +1638,53 @@
       window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   });
+
+  // ── Animated stat counters (count up when scrolled into view) ──
+  if (!reduceMotion) {
+    const counterEls = document.querySelectorAll('.counter');
+    const counterIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.target, 10);
+        const duration = 1600;
+        const startTime = performance.now();
+        const tick = ts => {
+          const progress = Math.min((ts - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          el.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterIO.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counterEls.forEach(el => counterIO.observe(el));
+  }
+
+  // ── Cursor sparkle trail (hero section only) ──
+  if (hero && !reduceMotion) {
+    const sparkColors = ['#DF6027', '#ff8a4d', '#ffffff', '#ffcd6e'];
+    let lastSparkTime = 0;
+    hero.addEventListener('mousemove', e => {
+      const now = Date.now();
+      if (now - lastSparkTime < 70) return;
+      lastSparkTime = now;
+      const spark = document.createElement('span');
+      spark.className = 'cursor-spark';
+      const size = 5 + Math.random() * 7;
+      spark.style.cssText = [
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'left:' + e.clientX + 'px',
+        'top:' + e.clientY + 'px',
+        'background:' + sparkColors[Math.floor(Math.random() * sparkColors.length)],
+        'box-shadow:0 0 ' + (size * 1.5) + 'px ' + sparkColors[0]
+      ].join(';');
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 800);
+    });
+  }
 </script>
 </body>
 </html>
