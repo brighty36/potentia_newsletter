@@ -241,19 +241,6 @@
     .pull-quote:hover {
       box-shadow: -4px 0 0 0 var(--orange), 0 8px 32px rgba(223,96,39,.12);
     }
-    /* Large decorative opening quote mark */
-    .pull-quote::before {
-      content: '\201C';
-      position: absolute;
-      top: -18px; left: 14px;
-      font-size: 130px;
-      line-height: 1;
-      color: var(--orange);
-      opacity: 0.13;
-      font-family: Georgia, 'Times New Roman', serif;
-      pointer-events: none;
-      user-select: none;
-    }
     /* Animated border line that draws down on scroll */
     .pull-quote::after {
       content: '';
@@ -276,8 +263,6 @@
     }
     /* Key phrase highlight */
     .pull-quote .pq-highlight {
-      color: var(--orange);
-      font-weight: 700;
       font-style: italic;
       position: relative;
       white-space: nowrap;
