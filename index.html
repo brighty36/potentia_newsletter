@@ -554,6 +554,28 @@
       background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,.1) 100%);
     }
     .t-card-img .tag { position: relative; z-index: 1; }
+    .t-card-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px; height: 52px;
+      background: rgba(223,96,39,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      padding-left: 4px;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .t-card:hover .t-card-play {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 6px 24px rgba(223,96,39,.5);
+    }
     .t-body {
       padding: 22px 20px 24px;
       flex: 1;
@@ -1265,7 +1287,7 @@
         <span class="sparkle s3" style="top:8px; right:16px; font-size:16px; color:var(--orange); opacity:.4;" aria-hidden="true">✦</span>
         <p>&ldquo;Quality is not just a step we add at the end. It is <span class="pq-highlight">how we run every project from day one</span>.&rdquo;</p>
       </div>
-      <p>Fraud in online research is not a new problem. But the tools being used to game surveys are getting smarter. Our clients make significant decisions off the back of online data. That is not something we take lightly, and we built something to address it.</p>
+      <p>Fraud in online research is not a new problem. But the tools being used to manipulate surveys are getting smarter. Our clients make significant decisions off the back of online data. That is not something we take lightly, and we built something to address it.</p>
       <p>Potentia Protect&trade; brings together and formalises everything we do in a robust, end-to-end quality framework. I sat down with Colin to explore the issue of data quality and how we&#8217;re using Potentia Protect to address this industry wide problem.</p>
       <div class="video-block">
         <iframe title="vimeo-player" src="https://player.vimeo.com/video/1191211292?h=f8ac619aed" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen style="width:100%; aspect-ratio:16/9; height:auto; display:block; border-radius:12px;"></iframe>
@@ -1362,12 +1384,17 @@
       </div>
     </article>
     <article class="t-card fade-up">
-      <div class="t-card-img" style="background-image: url('images/Potentia CaseStudy_FullView (1).png'); background-size: cover; background-position: center;"><span class="tag tag-orange">Case Study</span></div>
-      <div class="t-body">
-        <h3>Powering the World's Largest Brand Equity Study</h3>
-        <p>How Potentia partnered with Brand Finance to deliver the Global Brand Equity Monitor.</p>
-        <a href="https://potentia-insight.co.uk/powering-the-worlds-largest-brand-equity-study/">Read more &rarr;</a>
+      <a href="https://vimeo.com/1191233405?fl=pl&amp;fe=sh" target="_blank" rel="noopener" style="display:block; text-decoration:none; color:inherit;">
+      <div class="t-card-img" style="background-image: url('images/Screenshot 2026-05-14 145010.png'); background-size: cover; background-position: center;">
+        <div class="t-card-play">&#9654;</div>
+        <span class="tag tag-orange">Video</span>
       </div>
+      <div class="t-body">
+        <h3>Meet our Opinion Pulse panellists</h3>
+        <p>Quality data comes from quality panellists. We caught up with members of Opinion Pulse on why they signed up and what they get out of it.</p>
+        <span style="color:#DF6027; font-size:14px; font-weight:700;">Watch now &rarr;</span>
+      </div>
+      </a>
     </article>
   </div>
 </section>
