@@ -588,6 +588,7 @@
       color: var(--dark);
       margin-bottom: 10px;
       line-height: 1.35;
+      min-height: 4.05em;
     }
     .t-body p {
       font-size: 13px;
@@ -846,6 +847,18 @@
       color: var(--mid);
       margin-top: 4px;
     }
+    #mc_embed_signup { background: transparent; }
+    #mc_embed_signup_scroll { display: flex; flex-direction: column; gap: 14px; }
+    .mc-field-group { width: 100%; }
+    #mce-responses { width: 100%; }
+    #mce-error-response, #mce-success-response {
+      font-size: 13px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    #mce-error-response { background: #fef2f2; color: #b91c1c; }
+    #mce-success-response { background: #f0fdf4; color: #166534; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 760px) {
@@ -1439,11 +1452,24 @@
   <div class="signup-inner">
     <span class="eyebrow">Stay In The Loop</span>
     <h2>Subscribe to Potentia Pulse</h2>
-    <p>Get our briefing delivered straight to your inbox &mdash; data quality insights, case studies and company news.</p>
-    <form class="signup-form" action="#" method="post" novalidate>
-      <input type="email" name="email" placeholder="Work email address" autocomplete="email" required>
-      <button type="submit" class="btn btn-full">Subscribe &rarr;</button>
-    </form>
+    <p>Get our quarterly briefing delivered straight to your inbox &mdash; data quality insights, case studies and company news.</p>
+    <div id="mc_embed_signup">
+      <form action="https://potentia-insight.us2.list-manage.com/subscribe/post?u=efc1571b6be4ed703f757ec31&amp;id=83548ae3e0&amp;f_id=008befe0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate signup-form" target="_self" novalidate="">
+        <div id="mc_embed_signup_scroll">
+          <div class="mc-field-group">
+            <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="" placeholder="Work email address" autocomplete="email">
+          </div>
+          <div id="mce-responses">
+            <div class="response" id="mce-error-response" style="display:none;"></div>
+            <div class="response" id="mce-success-response" style="display:none;"></div>
+          </div>
+          <div aria-hidden="true" style="position:absolute; left:-5000px;">
+            <input type="text" name="b_efc1571b6be4ed703f757ec31_83548ae3e0" tabindex="-1" value="">
+          </div>
+          <button type="submit" id="mc-embedded-subscribe" class="btn btn-full">Subscribe &rarr;</button>
+        </div>
+      </form>
+    </div>
     <p class="form-note">No spam. Unsubscribe at any time.</p>
   </div>
 </section>
@@ -1742,5 +1768,7 @@
     });
   }
 </script>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+<script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 </body>
 </html>
