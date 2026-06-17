@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Potentia Pulse Vol. 1 - Potentia Insight</title>
+  <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+  <!-- Google tag (gtag.js) - loaded only after cookie consent is granted, see cookie consent script before </body> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied'
+    });
+  </script>
   <style>
     @font-face {
       font-family: 'Rework Text';
@@ -1770,5 +1779,51 @@
 </script>
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 <script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+
+<div id="cookie-consent-banner" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:9999; background:#1a1a1a; color:#fff; padding:16px 20px; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:1.5; box-shadow:0 -2px 10px rgba(0,0,0,0.2);">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:16px; justify-content:space-between;">
+    <span style="flex:1 1 300px;">
+      We use cookies to analyze site traffic via Google Analytics. By clicking "Accept", you consent to this use. See our <a href="https://potentia-insight.co.uk/privacy-policy/" target="_blank" rel="noopener" style="color:#f7941d; text-decoration:underline;">privacy policy</a> for details.
+    </span>
+    <span style="flex:0 0 auto; display:flex; gap:10px;">
+      <button id="cookie-consent-decline" style="background:transparent; color:#fff; border:1px solid #fff; border-radius:4px; padding:8px 16px; cursor:pointer; font-size:14px;">Decline</button>
+      <button id="cookie-consent-accept" style="background:#f7941d; color:#1a1a1a; border:none; border-radius:4px; padding:8px 16px; cursor:pointer; font-size:14px; font-weight:bold;">Accept</button>
+    </span>
+  </div>
+</div>
+<script>
+  (function() {
+    var CONSENT_KEY = 'potentia_cookie_consent';
+    var GA_ID = 'G-X5HR9JET5Q';
+    var banner = document.getElementById('cookie-consent-banner');
+
+    function loadGtag() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      gtag('config', GA_ID);
+    }
+
+    var stored = localStorage.getItem(CONSENT_KEY);
+    if (stored === 'granted') {
+      loadGtag();
+    } else if (stored !== 'denied') {
+      banner.style.display = 'block';
+    }
+
+    document.getElementById('cookie-consent-accept').addEventListener('click', function() {
+      localStorage.setItem(CONSENT_KEY, 'granted');
+      banner.style.display = 'none';
+      loadGtag();
+    });
+
+    document.getElementById('cookie-consent-decline').addEventListener('click', function() {
+      localStorage.setItem(CONSENT_KEY, 'denied');
+      banner.style.display = 'none';
+    });
+  })();
+</script>
 </body>
 </html>
