@@ -1829,5 +1829,37 @@
     });
   })();
 </script>
+<script>
+  (function() {
+    function resizeMessage() {
+      window.parent.postMessage({
+        type: "resize",
+        rect: document.documentElement.getBoundingClientRect(),
+      }, "*");
+    }
+    function resize() {
+      resizeMessage();
+      setTimeout(() => {
+        resizeMessage();
+      }, 1000);
+    }
+    window.addEventListener("resize", resize);
+    resizeMessage();
+
+    const observer = new MutationObserver((mutationList, observer) => {
+      resize();
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+
+    document.fonts.ready.then(function () {
+      resizeMessage();
+    });
+  })();
+</script>
 </body>
 </html>
